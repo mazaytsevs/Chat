@@ -6,15 +6,15 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-export const getUserFromServer = (id) => async (dispatch) => {
-  const response = await fetch(endPoints.getUser(id), {
-    credentials: 'include',
-  });
-  if (response.status === 200) {
-    const currentUser = await response.json();
-    dispatch(setUser(currentUser));
-  }
-};
+// export const getUserFromServer = (id) => async (dispatch) => {
+//   const response = await fetch(endPoints.getUser(id), {
+//     credentials: 'include',
+//   });
+//   if (response.status === 200) {
+//     const currentUser = await response.json();
+//     dispatch(setUser(currentUser));
+//   }
+// };
 
 export const signUp = (payload, navigate) => async (dispatch) => {
   try {
@@ -28,6 +28,7 @@ export const signUp = (payload, navigate) => async (dispatch) => {
     });
     if (response.status === 200) {
       const user = await response.json();
+      console.log('user', user);
       dispatch(setUser(user));
       navigate('/');
     } else {
@@ -69,12 +70,12 @@ export const signOut = () => async (dispatch) => {
   }
 };
 
-export const checkAuth = () => async (dispatch) => {
-  const response = await fetch(endPoints.checkAuth(), {
-    credentials: 'include',
-  });
-  if (response.status === 200) {
-    const user = await response.json();
-    dispatch(setUser(user));
-  }
-};
+// export const checkAuth = () => async (dispatch) => {
+//   const response = await fetch(endPoints.checkAuth(), {
+//     credentials: 'include',
+//   });
+//   if (response.status === 200) {
+//     const user = await response.json();
+//     dispatch(setUser(user));
+//   }
+// };

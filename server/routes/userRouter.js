@@ -3,18 +3,6 @@ const bcrypt = require('bcrypt');
 const { Account } = require('../db/models');
 const { checkLogin } = require('../middlewares/middleware');
 
-router.get('/check', checkLogin, (req, res) => {
-  const user = {
-    id: req.session.user.id,
-    name: req.session.user.name,
-  };
-  try {
-    res.json(user); // отправляет зарегестрированного юзера и id если такой залогинен
-  } catch (err) {
-    console.log('Не удалось проверить регистрацию', err);
-  }
-}); // проверка авторизации
-
 router.post('/reg', async (req, res) => {
   const {
     firstName,
@@ -52,21 +40,23 @@ router.post('/reg', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const {
-    email,
+    nick,
     password,
   } = req.body;
   try {
-    if (email && password) {
+    if (nick && password) {
       const currentUser = await Account.findOne({
         where: {
-          email,
+          nick,
         },
+        raw: true,
       });
       if (currentUser && await bcrypt.compare(password, currentUser.password)) {
         req.session.user = {
           id: currentUser.id,
-          name: currentUser.name,
+          name: currentUser.nick,
         };
+        delete currentUser.password;
         return res.json(currentUser); // отправляет статус 200, если юзер залогинился
       }
     } else {
@@ -86,5 +76,17 @@ router.get('/logout', async (req, res) => {
     console.log('Не удалось выйти из системы', err);
   }
 }); // разлогинивание
+
+router.get('/check', checkLogin, (req, res) => {
+  const user = {
+    id: req.session.user.id,
+    name: req.session.user.name,
+  };
+  try {
+    res.json(user); // отправляет зарегестрированного юзера и id если такой залогинен
+  } catch (err) {
+    console.log('Не удалось проверить регистрацию', err);
+  }
+}); // проверка авторизации
 
 module.exports = router;

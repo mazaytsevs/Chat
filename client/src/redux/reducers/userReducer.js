@@ -1,4 +1,4 @@
-import { saveToLocalStorage, deleteFromLocalStorage } from '../../helpers/saveToLocalStorage';
+import { deleteFromLocalStorage, saveToLocalStorage } from '../../helpers/saveToLocalStorage';
 import { SET_USER, DELETE_USER } from '../types/types';
 
 // eslint-disable-next-line default-param-last

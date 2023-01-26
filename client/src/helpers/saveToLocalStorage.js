@@ -1,6 +1,6 @@
-export function saveToLocalStorage() {
+export function saveToLocalStorage(key, state) {
   try {
-    // localStorage.setItem(`${key}`, JSON.stringify(state));
+    localStorage.setItem(`${key}`, JSON.stringify(state));
   } catch (e) {
     console.error(e);
   }

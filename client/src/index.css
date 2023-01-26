@@ -1,4 +1,4 @@
-.reg-group {
+.reg-group, .main-content {
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
@@ -11,4 +11,12 @@
     margin-left: auto;
     margin-right: auto;
     width: 100%
+}
+
+.dialogue-input {
+    margin-bottom: 10%;
+    /* margin-top: 10%; */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30%;
 }

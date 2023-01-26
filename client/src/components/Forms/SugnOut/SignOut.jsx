@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from '../../../redux/actions/user.action';
 
 function SignOut() {
-  localStorage.clear();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  localStorage.clear();
   console.log('ldfjckdc');
+
   useEffect(() => {
-    dispatch(signOut());
+    dispatch(signOut(navigate));
     navigate('/');
   }, []);
 

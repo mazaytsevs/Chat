@@ -6,6 +6,10 @@ export const setUser = (user) => ({
   payload: user,
 });
 
+export const deleteUser = () => ({
+  type: DELETE_USER,
+});
+
 // export const getUserFromServer = (id) => async (dispatch) => {
 //   const response = await fetch(endPoints.getUser(id), {
 //     credentials: 'include',
@@ -57,16 +61,14 @@ export const signIn = (payload, navigate) => async (dispatch) => {
   }
 };
 
-export const deleteUser = () => ({
-  type: DELETE_USER,
-});
-
-export const signOut = () => async (dispatch) => {
+export const signOut = (navigate) => async (dispatch) => {
   const response = await fetch(endPoints.signOut(), {
     credentials: 'include',
   });
   if (response.status === 200) {
     dispatch(deleteUser());
+    localStorage.clear();
+    navigate('/');
   }
 };
 

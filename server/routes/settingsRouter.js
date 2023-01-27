@@ -20,7 +20,20 @@ router.post('/block', async (req, res) => {
       date_before,
       reason,
     });
-    res.json('user was blocked');
+
+    await Account.update(
+      { status: 'inactive' },
+      { where: { user_id } },
+    );
+
+    const users = await Account.findAll({
+      where: {
+        role: { [Op.in]: ['user', 'moderator'] },
+      },
+      attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+    });
+
+    res.json(users);
   } catch (err) {
     console.log('Не удалось заблокировать пользователя');
   }
@@ -37,7 +50,20 @@ router.post('/unblock', async (req, res) => {
     await Block.destroy({
       where: { user_id },
     });
-    res.json('User was blocked');
+
+    await Account.update(
+      { status: 'active' },
+      { where: { user_id } },
+    );
+
+    const users = await Account.findAll({
+      where: {
+        role: { [Op.in]: ['user', 'moderator'] },
+      },
+      attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+    });
+
+    res.json(users);
   } catch (err) {
     console.log('User was not blocked');
   }
@@ -47,8 +73,6 @@ router.post('/appoint-a-moderator', async (req, res) => {
   const {
     user_id, initiator_id,
   } = req.body;
-
-  console.log('user_id, initiator_id', user_id, initiator_id);
 
   await checkRights(res, initiator_id, ['admin']);
 
@@ -60,7 +84,6 @@ router.post('/appoint-a-moderator', async (req, res) => {
     const users = await Account.findAll({
       where: {
         role: { [Op.in]: ['user', 'moderator'] },
-        status: 'active',
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
     });
@@ -86,7 +109,6 @@ router.post('/demote', async (req, res) => {
     const users = await Account.findAll({
       where: {
         role: { [Op.in]: ['user', 'moderator'] },
-        status: 'active',
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
     });

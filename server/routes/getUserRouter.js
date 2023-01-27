@@ -30,7 +30,6 @@ router.post('/all-for-settings', async (req, res) => {
     const users = await Account.findAll({
       where: {
         role: { [Op.in]: ['user', 'moderator'] },
-        status: 'active',
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
     });

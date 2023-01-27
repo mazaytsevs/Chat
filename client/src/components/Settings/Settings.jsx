@@ -12,12 +12,17 @@ import Badge from 'react-bootstrap/Badge';
 
 import { getAllUsers, getAllUserssettings } from '../../redux/actions/getUser.action';
 import { appointModeratorThunk, demoteModeratorThunk } from '../../redux/actions/appointModerator.action';
+import { blockUserThunk, unBlockUserThunk } from '../../redux/actions/blockUser.action';
 
 function Settings() {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.usersList);
   const usersListSettings = useSelector((state) => state.userListSettings);
   const [show, setShow] = useState(false);
+  const [blockOptions, setBlockOptions] = useState({
+    date_before: '',
+    reason: '',
+  });
   // const [usersListSettings, setUsersListSettings] = useState([]);
   const user = useSelector((state) => state.user) || localStorage.getItem('user');
 
@@ -25,7 +30,9 @@ function Settings() {
     dispatch(getAllUserssettings(user.user_id));
   }, [usersList]);
 
-  console.log('usersListSettings', usersListSettings);
+  const changeHandler = (e) => {
+    setBlockOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   function appointModerator(user_id) {
     dispatch(appointModeratorThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
@@ -33,6 +40,15 @@ function Settings() {
 
   function demoteModerator(user_id) {
     dispatch(demoteModeratorThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
+  }
+
+  function bloclSubmitHandler(user_id) {
+    dispatch(blockUserThunk({ user_id, initiator_id: JSON.parse(user).user_id, ...blockOptions }));
+  }
+
+  function unbloclSubmitHandler(user_id) {
+    dispatch(unBlockUserThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
+    // user_id, initiator_id
   }
 
   const handleClose = () => setShow(false);
@@ -71,28 +87,59 @@ function Settings() {
               </Button>
             </div>
 
-            <Modal show={show} onHide={handleClose} animation={false}>
-              <Modal.Header closeButton>
-                <Modal.Title>Block user</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Choose the reason why the user should be blocked:</Modal.Body>
-              <Form.Select aria-label="Default select example" className="form-class">
-                <option value="1">Disrespectful attitude towards other users</option>
-                <option value="2">Thinks angular is better than react</option>
-                <option value="3">Doesn`t want to see photos of admin`s dogs</option>
-                <option value="3">Other</option>
-              </Form.Select>
-              <Modal.Body>Select the date before which the user should be blocked:</Modal.Body>
-              <input type="date" id="date" name="date" className="form-class" />
-              <Modal.Footer>
-                <Button variant="outline-dark" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="dark" onClick={handleClose}>
-                  Save
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            {userSetting.status === 'inactive' ? (
+              <Button
+                variant="success"
+                type="button"
+                onClick={() => unbloclSubmitHandler(userSetting.user_id)}
+              >
+                Unblock user
+              </Button>
+            )
+              : (
+                <Modal show={show} onHide={handleClose} animation={false}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Block user</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Choose the reason why the user should be blocked:</Modal.Body>
+                  <Form.Select
+                    aria-label="Default select example"
+                    className="form-class"
+                    name="reason"
+                    type="text"
+                    onChange={changeHandler}
+                  >
+                    <option value="" name="reason">Choose the reason</option>
+                    <option value="Disrespectful attitude towards other users" name="reason">Disrespectful attitude towards other users</option>
+                    <option value="Thinks angular is better than react" name="reason">Thinks angular is better than react</option>
+                    <option value="Doesn`t want to see photos of admin`s dogs" name="reason">Doesn`t want to see photos of admin`s dogs</option>
+                    <option value="Other" name="reason">Other</option>
+                  </Form.Select>
+                  <Modal.Body>Select the date before which the user should be blocked:</Modal.Body>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date_before"
+                    className="form-class"
+                    onChange={changeHandler}
+                  />
+                  <Modal.Footer>
+                    <Button variant="outline-dark" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button
+                      variant="dark"
+                      type="button"
+                      onClick={() => {
+                        bloclSubmitHandler(userSetting.user_id);
+                        handleClose();
+                      }}
+                    >
+                      Save
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              )}
           </Card.Body>
         </Card>
       ))}

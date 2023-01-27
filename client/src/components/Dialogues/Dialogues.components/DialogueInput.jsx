@@ -92,50 +92,25 @@ function DialogueInput() {
 
   return (
     <>
-      {messages.map((mess) => (
-        <Toast>
-          <Toast.Header key={mess.id}>
-            {/* {mess.event === 'connection'
-                ? (
-                  <div className="connection_message">
-                    User
-                    {' '}
-                    {mess.username}
-                    {' '}
-                    connected.
-                  </div>
-                ) : ( */}
-            <>
-              <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-              <strong className="me-auto">{mess.username}</strong>
-              {/* <small>11 mins ago</small> */}
-            </>
-
-          </Toast.Header>
-          <Toast.Body>{mess.message}</Toast.Body>
-        </Toast>
-      ))}
       <div className="messages">
         {messages.map((mess) => (
-          <div key={mess.id}>
+          <Toast key={mess.id}>
+            <Toast.Header key={mess.id}>
+              {' '}
+              <strong className="me-auto">{mess.username}</strong>
+            </Toast.Header>
             {mess.event === 'connection'
                 ? (
-                  <div className="connection_message">
-                    User
-                    {' '}
-                    {mess.username}
-                    {' '}
-                    connected.
-                  </div>
+                  <Toast.Body className="connection_message">
+                    User connected .
+                  </Toast.Body>
                 )
                 : (
-                  <div className="message">
-                    {mess.username}
-                    .
+                  <Toast.Body className="message">
                     {mess.message}
-                  </div>
+                  </Toast.Body>
                 )}
-          </div>
+          </Toast>
           ))}
       </div>
       <Form className="dialogue-input">

@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      user_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       nick: {
         type: Sequelize.STRING,
         allowNull: false,

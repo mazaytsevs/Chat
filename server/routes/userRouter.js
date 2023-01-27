@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { Account } = require('../db/models');

@@ -4,8 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavbarBoot from 'react-bootstrap/Navbar';
 
 function Navbar() {
-  const user = useSelector((state) => state.user) || localStorage.getItem('state');
-  console.log('BLAAA', user);
+  const user = useSelector((state) => state.user) || localStorage.getItem('user');
   return (
     <NavbarBoot bg="dark" variant="dark">
       <Container>

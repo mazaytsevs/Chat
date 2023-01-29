@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Account extends Model {
     /**
@@ -9,17 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Block }) {
+      this.hasOne(Block, { foreignKey: 'user_id' });
     }
   }
   Account.init({
-    account_id: DataTypes.INTEGER,
+    // id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
     nick: DataTypes.STRING,
+    password: DataTypes.STRING,
     name: DataTypes.STRING,
     surname: DataTypes.STRING,
-    role: DataTypes.STRING,
-    status: DataTypes.STRING
+    role: DataTypes.ENUM('user', 'moderator', 'admin'),
+    status: DataTypes.ENUM('active', 'inactive'),
   }, {
     sequelize,
     modelName: 'Account',

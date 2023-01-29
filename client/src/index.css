@@ -1,13 +1,92 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.reg-group, .main-content {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.submit-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%
+}
+
+.dialogue-input {
+    margin-bottom: 10%;
+    /* margin-top: 10%; */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30%;
+}
+
+.form-class {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.topic-header {
+    margin-right: 15px;
+}
+
+.user-info-value {
+    margin-right: 15px;
+    min-width: 150px;
+    max-width: 150px;
+}
+
+/* .button-for-settings {
+    margin-left: auto;
+    margin-right: 15px;
+} */
+
+.user-card {
+    display: flex;
+    justify-content:center;
+    
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    vertical-align: middle;
+}
+
+.access-denied {
+    text-align: center;
+}
+
+.messages {
+    max-width: 30%;
+}
+
+.user-message {
+    background-color: #45a88945;
+    max-width: 20%;
+    /* margin-right: 10%; */
+    position: relative;
+    left: 60%;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%
+}
+
+.stranger-message {
+    background-color: #ff60004f;
+    max-width: 20%;
+    /* margin-right: 10%; */
+    position: relative;
+    left: 20%;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%
+}
+
+.about-me {
+    text-align: center;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
 }

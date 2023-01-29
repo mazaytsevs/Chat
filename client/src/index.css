@@ -54,3 +54,31 @@ h2 {
 p {
     vertical-align: middle;
 }
+
+.access-denied {
+    text-align: center;
+}
+
+.messages {
+    max-width: 30%;
+}
+
+.user-message {
+    background-color: #45a88945;
+    max-width: 20%;
+    /* margin-right: 10%; */
+    position: relative;
+    left: 60%;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%
+}
+
+.stranger-message {
+    background-color: #ff60004f;
+    max-width: 20%;
+    /* margin-right: 10%; */
+    position: relative;
+    left: 20%;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%
+}

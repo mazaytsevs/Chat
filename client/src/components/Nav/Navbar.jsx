@@ -5,6 +5,7 @@ import NavbarBoot from 'react-bootstrap/Navbar';
 
 function Navbar() {
   const user = useSelector((state) => state.user) || localStorage.getItem('user');
+
   return (
     <NavbarBoot bg="dark" variant="dark">
       <Container>
@@ -14,7 +15,8 @@ function Navbar() {
             <>
               <Nav.Link href="/profile">My Profile</Nav.Link>
               <Nav.Link href="/dialogues">Dialogues</Nav.Link>
-              <Nav.Link href="/settings">Settings</Nav.Link>
+              {['admin', 'moderator'].includes(user.role)
+              && <Nav.Link href="/settings">Settings</Nav.Link>}
               <Nav.Link href="/signout">Sign Out</Nav.Link>
             </>
           ) : (

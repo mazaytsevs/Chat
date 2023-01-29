@@ -4,6 +4,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -15,6 +17,10 @@ import { appointModeratorThunk, demoteModeratorThunk } from '../../redux/actions
 import { blockUserThunk, unBlockUserThunk } from '../../redux/actions/blockUser.action';
 
 function Settings() {
+  const navigate = useNavigate();
+  const user = JSON.parse(useSelector((state) => state.user) || localStorage.getItem('user'));
+  if (user.role === 'user') navigate('/accessDenied');
+
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.usersList);
   const usersListSettings = useSelector((state) => state.userListSettings);
@@ -24,7 +30,7 @@ function Settings() {
     reason: '',
   });
   // const [usersListSettings, setUsersListSettings] = useState([]);
-  const user = useSelector((state) => state.user) || localStorage.getItem('user');
+  console.log('user', user);
 
   useEffect(() => {
     dispatch(getAllUserssettings(user.user_id));
@@ -72,19 +78,20 @@ function Settings() {
             </Badge>
             <div className="user-info-value">{userSetting.status}</div>
             <div className="buttons-for-settings">
-              {userSetting.role === 'user' ? (
-                <Button onClick={() => appointModerator(userSetting.user_id)} variant="outline-success">
-                  Appoint a moderator
-                </Button>
-              )
-                : (
-                  <Button onClick={() => demoteModerator(userSetting.user_id)} variant="outline-danger">
-                    Demote a moderator
-                  </Button>
-                )}
-              <Button variant="dark" onClick={handleShow}>
-                Block user
-              </Button>
+              {user.role === 'admin' && (
+                <div>
+                  {(userSetting.role === 'user' && user.role === 'admin') ? (
+                    <Button onClick={() => appointModerator(userSetting.user_id)} variant="outline-success">
+                      Appoint a moderator
+                    </Button>
+                  )
+                    : (
+                      <Button onClick={() => demoteModerator(userSetting.user_id)} variant="outline-danger">
+                        Demote a moderator
+                      </Button>
+                    )}
+                </div>
+              )}
             </div>
 
             {userSetting.status === 'inactive' ? (
@@ -95,8 +102,11 @@ function Settings() {
               >
                 Unblock user
               </Button>
-            )
-              : (
+            ) : (
+              <>
+                <Button variant="dark" onClick={handleShow}>
+                  Block user
+                </Button>
                 <Modal show={show} onHide={handleClose} animation={false}>
                   <Modal.Header closeButton>
                     <Modal.Title>Block user</Modal.Title>
@@ -139,7 +149,8 @@ function Settings() {
                     </Button>
                   </Modal.Footer>
                 </Modal>
-              )}
+              </>
+            )}
           </Card.Body>
         </Card>
       ))}

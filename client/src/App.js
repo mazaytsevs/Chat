@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import AccessDenied from './components/AccessDenied/AccessDenied';
 import Dialogues from './components/Dialogues/Dialogues';
 import SignIn from './components/Forms/SignIn/SignIn';
 import SignUp from './components/Forms/SignUp/SignUp';
@@ -8,8 +10,13 @@ import Home from './components/Home/Home';
 import Navbar from './components/Nav/Navbar';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
+import { getUserSessionThunk } from './redux/actions/user.action';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserSessionThunk());
+  }, []);
   return (
 
     <div className="App">
@@ -22,6 +29,7 @@ function App() {
         <Route path="/dialogues" element={<Dialogues />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/accessDenied" element={<AccessDenied />} />
       </Routes>
     </div>
   );

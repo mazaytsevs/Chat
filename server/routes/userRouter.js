@@ -12,7 +12,6 @@ router.post('/reg', async (req, res) => {
     email,
     password,
   } = req.body;
-  console.log(req.body);
   try {
     if (firstName && secondName && nick && email && password) {
       const newUser = await Account.create({
@@ -79,11 +78,13 @@ router.get('/logout', async (req, res) => {
 }); // разлогинивание
 
 router.get('/check', checkLogin, (req, res) => {
+  console.log('req.session', req.session);
   const user = {
     id: req.session.user.id,
     name: req.session.user.name,
   };
   try {
+    console.log('user', user);
     res.json(user); // отправляет зарегестрированного юзера и id если такой залогинен
   } catch (err) {
     console.log('Не удалось проверить регистрацию', err);

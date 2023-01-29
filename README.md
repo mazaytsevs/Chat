@@ -28,9 +28,9 @@ ___
 - Далее необходимо установить пакеты для фронта и бэка командой ```npm i``` в каждом из терминалов.
 - В терминале server: ```npx sequelize-cli db:migrate``` , а затем: ```npx sequelize-cli db:seed:all```
 - Запуск каждого из сервисов выполняется следующими командами:
-```server: npm run dev```
-```sockets: npm run dev-sockets```
-```client: npm start```
+server: ```npm run dev```
+sockets: ```npm run dev-sockets```
+client: ```npm start```
 
 ___
 

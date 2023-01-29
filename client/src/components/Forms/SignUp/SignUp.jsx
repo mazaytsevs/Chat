@@ -37,7 +37,6 @@ function SignUp() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('userSignUp', userSignUp);
     dispatch(signUp(userSignUp, navigate));
   };
 

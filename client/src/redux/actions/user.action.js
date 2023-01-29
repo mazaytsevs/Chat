@@ -32,7 +32,6 @@ export const signUp = (payload, navigate) => async (dispatch) => {
     });
     if (response.status === 200) {
       const user = await response.json();
-      console.log('user', user);
       dispatch(setUser(user));
       navigate('/');
     } else {
@@ -73,14 +72,12 @@ export const signOut = (navigate) => async (dispatch) => {
 };
 
 export const getUserSessionThunk = () => async (dispatch) => {
-  console.log('im here');
   try {
     const response = await fetch(endPoints.getUserSession(), {
       method: 'GET',
     });
     if (response.status === 200) {
       const user = await response.json();
-      console.log('user', user);
       dispatch(setUser(user));
     }
   } catch (error) {

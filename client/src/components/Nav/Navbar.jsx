@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavbarBoot from 'react-bootstrap/Navbar';
 
 function Navbar() {
-  const user = useSelector((state) => state.user) || localStorage.getItem('user');
+  const user = useSelector((state) => state.user) || JSON.parse(localStorage.getItem('user'));
 
   return (
     <NavbarBoot bg="dark" variant="dark">
@@ -13,7 +13,7 @@ function Navbar() {
         <Nav className="me-auto">
           {user ? (
             <>
-              <Nav.Link href="/profile">My Profile</Nav.Link>
+              {/* <Nav.Link href="/profile">My Profile</Nav.Link> */}
               <Nav.Link href="/dialogues">Dialogues</Nav.Link>
               {['admin', 'moderator'].includes(user.role)
               && <Nav.Link href="/settings">Settings</Nav.Link>}

@@ -19,7 +19,6 @@ export const getAllUsers = () => async (dispatch) => {
     });
     if (response.status === 200) {
       const users = await response.json();
-      console.log('user', users);
       dispatch(getUsers(users));
     }
   } catch (error) {
@@ -38,7 +37,6 @@ export const getAllUserssettings = (user_id) => async (dispatch) => {
       body: JSON.stringify({ initiator_id: user_id }),
     });
     const users = await response.json();
-    console.log('user settings', users);
     dispatch(getUsersSettings(users));
   } catch (error) {
     console.log(error);

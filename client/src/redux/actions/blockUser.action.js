@@ -13,7 +13,6 @@ export const unblockUser = (users) => ({
 });
 
 export const blockUserThunk = (data) => async (dispatch) => {
-  console.log('blockUserThunk', data);
   try {
     const response = await fetch(endPoints.blockUser(), {
       method: 'POST',

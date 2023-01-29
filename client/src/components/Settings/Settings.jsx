@@ -29,8 +29,6 @@ function Settings() {
     date_before: '',
     reason: '',
   });
-  // const [usersListSettings, setUsersListSettings] = useState([]);
-  console.log('user', user);
 
   useEffect(() => {
     dispatch(getAllUserssettings(user.user_id));
@@ -41,19 +39,19 @@ function Settings() {
   };
 
   function appointModerator(user_id) {
-    dispatch(appointModeratorThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
+    dispatch(appointModeratorThunk({ user_id, initiator_id: user.user_id }));
   }
 
   function demoteModerator(user_id) {
-    dispatch(demoteModeratorThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
+    dispatch(demoteModeratorThunk({ user_id, initiator_id: user.user_id }));
   }
 
   function bloclSubmitHandler(user_id) {
-    dispatch(blockUserThunk({ user_id, initiator_id: JSON.parse(user).user_id, ...blockOptions }));
+    dispatch(blockUserThunk({ user_id, initiator_id: user.user_id, ...blockOptions }));
   }
 
   function unbloclSubmitHandler(user_id) {
-    dispatch(unBlockUserThunk({ user_id, initiator_id: JSON.parse(user).user_id }));
+    dispatch(unBlockUserThunk({ user_id, initiator_id: user.user_id }));
     // user_id, initiator_id
   }
 

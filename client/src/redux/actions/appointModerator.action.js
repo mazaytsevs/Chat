@@ -13,7 +13,6 @@ export const demoteModerator = (users) => ({
 });
 
 export const appointModeratorThunk = (data) => async (dispatch) => {
-  console.log('user_id, initiator_id', data);
   try {
     const response = await fetch(endPoints.appointModerator(), {
       method: 'POST',
@@ -24,7 +23,6 @@ export const appointModeratorThunk = (data) => async (dispatch) => {
       body: JSON.stringify(data),
     });
     const users = await response.json();
-    console.log('user settings', users);
     dispatch(appointModerator(users));
   } catch (error) {
     console.log(error);
@@ -42,7 +40,6 @@ export const demoteModeratorThunk = (data) => async (dispatch) => {
       body: JSON.stringify(data),
     });
     const users = await response.json();
-    console.log('user settings', users);
     dispatch(demoteModerator(users));
   } catch (error) {
     console.log(error);

@@ -11,6 +11,7 @@ const { checkSession } = require('./middlewares/middleware');
 const userRouter = require('./routes/userRouter');
 const settingsRouter = require('./routes/settingsRouter');
 const getUserRouter = require('./routes/getUserRouter');
+const { checkBlocks } = require('./helper/checkBlocks');
 
 const PORT = process.env.PORT ?? 3003;
 
@@ -44,6 +45,10 @@ app.use(session({
 }));
 
 app.use(checkSession);
+
+setInterval(() => {
+  checkBlocks();
+}, 1000 * 60 * 60 * 24);
 
 app.use('/auth', userRouter); // проверка авторизации, регистрация, авторизация, разлогинивание
 app.use('/settings', settingsRouter); // заблокировать, разблокировать, назначить модером, разжаловать

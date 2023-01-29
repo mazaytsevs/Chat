@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
           name: currentUser.nick,
         };
         delete currentUser.password;
-        return res.json(currentUser); // отправляет статус 200, если юзер залогинился
+        return res.json(currentUser);
       }
     } else {
       console.log('Введите все данные для пользователя');
@@ -78,13 +78,11 @@ router.get('/logout', async (req, res) => {
 }); // разлогинивание
 
 router.get('/check', checkLogin, (req, res) => {
-  console.log('req.session', req.session);
   const user = {
     id: req.session.user.id,
     name: req.session.user.name,
   };
   try {
-    console.log('user', user);
     res.json(user); // отправляет зарегестрированного юзера и id если такой залогинен
   } catch (err) {
     console.log('Не удалось проверить регистрацию', err);

@@ -7,7 +7,6 @@ function SignOut() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   localStorage.clear();
-  console.log('ldfjckdc');
 
   useEffect(() => {
     dispatch(signOut(navigate));

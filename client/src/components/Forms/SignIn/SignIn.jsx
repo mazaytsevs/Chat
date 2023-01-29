@@ -33,7 +33,6 @@ function SignIn() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('userSignUp', userSignIn);
     dispatch(signIn(userSignIn, navigate));
   };
   return (

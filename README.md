@@ -26,7 +26,7 @@ ___
 DB_PASS креды для вашей базы данных PostgresQL.
 - Открываем три терминала: client (cd client), server (cd server), socket (cd server).
 - Далее необходимо установить пакеты для фронта и бэка командой npm i в каждом из терминалов.
-- В терминале server: sequelize-cli db:migrate , а затем: sequelize-cli db:seed
+- В терминале server: npx sequelize-cli db:migrate , а затем: npx sequelize-cli db:seed
 - Запуск каждого из сервисов выполняется следующими командами:
 server: npm run dev
 sockets: npm run dev-sockets

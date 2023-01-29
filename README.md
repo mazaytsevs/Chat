@@ -22,9 +22,8 @@ ___
 ___
 
 ## Инструкция по локальному запуску:
-- В папке "server" находим файл .envExample, переименовываем файл на .env и вставляем в DB_USER
+- В папке "server" находим файл .envExample, переименовываем файл на .env и вставляем в ```DB_USER``` и ```DB_PASS``` креды для вашей базы данных PostgresQL.
 - В папке "client" находим файл .envExample, переименовываем файл на .env
-DB_PASS креды для вашей базы данных PostgresQL.
 - Открываем три терминала: client (```cd client```), server (```cd server```), socket (```cd server```).
 - Далее необходимо установить пакеты для фронта и бэка командой ```npm i``` в каждом из терминалов.
 - В терминале server: ```npx sequelize-cli db:migrate``` , а затем: ```npx sequelize-cli db:seed:all```

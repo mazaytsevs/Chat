@@ -17,6 +17,8 @@ ___
 
 
  А также: REST API, web-sockets, Sequelize
+ <br/>
+
  Шаблоны дизайнов взяты с сайта: https://react-bootstrap.github.io/
 <br/>
 <br/>

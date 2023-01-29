@@ -2,7 +2,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { Account } = require('../db/models');
-const { checkLogin } = require('../middlewares/middleware');
 
 router.post('/reg', async (req, res) => {
   const {
@@ -29,14 +28,14 @@ router.post('/reg', async (req, res) => {
         id: newUser.account_id,
         name: newUser.nick,
       };
-      res.json(newUser); // отправляет статус 200, если юзер зарегестрировался
+      res.json(newUser);
     } else {
       console.log('Введите все данные для пользователя');
     }
   } catch (err) {
     console.log('Не получилось зарегистрировать', err);
   }
-}); // регистрация
+});
 
 router.post('/login', async (req, res) => {
   const {
@@ -65,28 +64,27 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.log('Не удалось загрузить игровые элементы', err);
   }
-}); // авторизация
+});
 
 router.get('/logout', async (req, res) => {
   try {
     req.session.destroy();
     res.clearCookie('sid');
-    res.sendStatus(200); // отправляет статус 200, если юзер раззалогинился
+    res.sendStatus(200);
   } catch (err) {
     console.log('Не удалось выйти из системы', err);
   }
-}); // разлогинивание
+});
 
-router.get('/check', checkLogin, (req, res) => {
-  const user = {
-    id: req.session.user.id,
-    name: req.session.user.name,
-  };
+router.post('/check', async (req, res) => {
+  const { user_id } = req.body;
   try {
-    res.json(user); // отправляет зарегестрированного юзера и id если такой залогинен
+    const user = await Account.findOne({ where: { user_id }, raw: true });
+    delete user.password;
+    res.json(user);
   } catch (err) {
     console.log('Не удалось проверить регистрацию', err);
   }
-}); // проверка авторизации
+});
 
 module.exports = router;

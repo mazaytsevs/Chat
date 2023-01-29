@@ -31,6 +31,9 @@ router.post('/block', async (req, res) => {
         role: { [Op.in]: ['user', 'moderator'] },
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+      order: [
+        ['nick', 'DESC'],
+      ],
     });
 
     res.json(users);
@@ -61,6 +64,9 @@ router.post('/unblock', async (req, res) => {
         role: { [Op.in]: ['user', 'moderator'] },
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+      order: [
+        ['nick', 'DESC'],
+      ],
     });
 
     res.json(users);
@@ -86,6 +92,9 @@ router.post('/appoint-a-moderator', async (req, res) => {
         role: { [Op.in]: ['user', 'moderator'] },
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+      order: [
+        ['nick', 'DESC'],
+      ],
     });
 
     res.json(users);
@@ -111,6 +120,9 @@ router.post('/demote', async (req, res) => {
         role: { [Op.in]: ['user', 'moderator'] },
       },
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
+      order: [
+        ['nick', 'DESC'],
+      ],
     });
 
     res.json(users);

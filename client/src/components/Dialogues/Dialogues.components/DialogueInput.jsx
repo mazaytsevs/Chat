@@ -13,16 +13,13 @@ function DialogueInput() {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState('');
   const socket = useRef();
-  // const [connected, setConnected] = useState(false);
-  // const [username, setUsername] = useState('');
 
-  const user = JSON.parse(useSelector((state) => state.user) || localStorage.getItem('user'));
+  const user = useSelector((state) => state.user) || JSON.parse(localStorage.getItem('user'));
 
   function connect() {
     socket.current = new WebSocket('ws://localhost:8000');
 
     socket.current.onopen = () => {
-      // setConnected(true);
       const message = {
         event: 'connection',
         username: user.nick,
@@ -59,7 +56,7 @@ function DialogueInput() {
 
   return (
     <>
-      <div>
+      <div className="dialogue-zone">
         {messages.map((mess) => (
           <Card key={mess.id} className={mess.username === user.nick ? 'user-message' : 'stranger-message'}>
             <Card.Header key={mess.id}>

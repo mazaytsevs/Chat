@@ -1,5 +1,5 @@
-import React from 'react';
-// import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import AccessDenied from './components/AccessDenied/AccessDenied';
 import Dialogues from './components/Dialogues/Dialogues';
@@ -10,13 +10,18 @@ import Home from './components/Home/Home';
 import Navbar from './components/Nav/Navbar';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
+import { getUserSessionThunk } from './redux/actions/user.action';
 // import { getUserSessionThunk } from './redux/actions/user.action';
 
 function App() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getUserSessionThunk());
-  // }, []);
+  const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    if (user) dispatch(getUserSessionThunk(user.user_id));
+  }, []);
+
   return (
 
     <div className="App">

@@ -17,11 +17,11 @@ router.get('/all', async (req, res) => {
       attributes: ['user_id', 'nick', 'name', 'surname'],
     });
 
-    res.json(users); // отправляет зарегестрированного юзера и id если такой залогинен
+    res.json(users);
   } catch (err) {
     console.log('Не удалось проверить регистрацию', err);
   }
-}); // проверка авторизации
+});
 
 router.post('/all-for-settings', async (req, res) => {
   const { initiator_id } = req.body;
@@ -34,10 +34,10 @@ router.post('/all-for-settings', async (req, res) => {
       attributes: ['user_id', 'nick', 'name', 'surname', 'role', 'status', 'createdAt'],
     });
 
-    res.json(users); // отправляет зарегестрированного юзера и id если такой залогинен
+    res.json(users);
   } catch (err) {
     console.log('Не удалось проверить регистрацию', err);
   }
-}); // проверка авторизации
+});
 
 module.exports = router;

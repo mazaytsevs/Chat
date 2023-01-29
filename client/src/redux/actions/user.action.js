@@ -71,10 +71,15 @@ export const signOut = (navigate) => async (dispatch) => {
   }
 };
 
-export const getUserSessionThunk = () => async (dispatch) => {
+export const getUserSessionThunk = (id) => async (dispatch) => {
   try {
     const response = await fetch(endPoints.getUserSession(), {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ user_id: id }),
     });
     if (response.status === 200) {
       const user = await response.json();
@@ -84,13 +89,3 @@ export const getUserSessionThunk = () => async (dispatch) => {
     console.log(error);
   }
 };
-
-// export const checkAuth = () => async (dispatch) => {
-//   const response = await fetch(endPoints.checkAuth(), {
-//     credentials: 'include',
-//   });
-//   if (response.status === 200) {
-//     const user = await response.json();
-//     dispatch(setUser(user));
-//   }
-// };

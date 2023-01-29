@@ -18,8 +18,8 @@ import { blockUserThunk, unBlockUserThunk } from '../../redux/actions/blockUser.
 
 function Settings() {
   const navigate = useNavigate();
-  const user = JSON.parse(useSelector((state) => state.user) || localStorage.getItem('user'));
-  if (user.role === 'user') navigate('/accessDenied');
+  const user = useSelector((state) => state.user);
+  if (user?.role === 'user') navigate('/accessDenied');
 
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.usersList);
@@ -31,7 +31,7 @@ function Settings() {
   });
 
   useEffect(() => {
-    dispatch(getAllUserssettings(user.user_id));
+    dispatch(getAllUserssettings(user?.user_id));
   }, [usersList]);
 
   const changeHandler = (e) => {
@@ -76,7 +76,7 @@ function Settings() {
             </Badge>
             <div className="user-info-value">{userSetting.status}</div>
             <div className="buttons-for-settings">
-              {user.role === 'admin' && (
+              {user?.role === 'admin' && (
                 <div>
                   {(userSetting.role === 'user' && user.role === 'admin') ? (
                     <Button onClick={() => appointModerator(userSetting.user_id)} variant="outline-success">

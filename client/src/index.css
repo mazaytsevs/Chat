@@ -97,3 +97,7 @@ p {
     height: 350px;
     overflow-y: auto;
 }
+
+.icons-links {
+    margin: 0 auto;
+}

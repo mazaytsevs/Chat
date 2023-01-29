@@ -15,12 +15,11 @@ function Home() {
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item>
-          <img align="left" alt="mazaytsevs | LinkedIn" width="60px" src="https://img.icons8.com/color/344/linkedin-circled--v3.png" />
-          <img align="left" alt="mazaytsevs | Telegram" width="60px" src="https://img.icons8.com/fluency/48/000000/telegram-app.png" />
-          <img align="left" alt="mazaytsevs | WA" width="60px" src="https://img.icons8.com/color/344/whatsapp--v5.png" />
-          <img align="left" alt="mazaytsevs | Instagram" width="60px" src="https://img.icons8.com/fluency/48/000000/instagram-new.png" />
-          <img align="left" alt="mazaytsevs | VK" width="60px" src="https://img.icons8.com/color/344/vk-com.png" />
+        <ListGroup.Item className="icons-links">
+          <a href="https://www.linkedin.com/in/mazaytsevs/"><img align="left" alt="mazaytsevs | LinkedIn" width="60px" src="https://img.icons8.com/color/344/linkedin-circled--v3.png" /></a>
+          <a href="https://t.me/mazay_tseva"><img align="left" alt="mazaytsevs | Telegram" width="60px" src="https://img.icons8.com/fluency/48/000000/telegram-app.png" /></a>
+          <a href="https://api.whatsapp.com/send/?phone=79126246550&text&type=phone_number&app_absent=0"><img align="left" alt="mazaytsevs | WA" width="60px" src="https://img.icons8.com/color/344/whatsapp--v5.png" /></a>
+          <a href="https://instagram.com/mazay_tseva?igshid=YmMyMTA2M2Y="><img align="left" alt="mazaytsevs | Instagram" width="60px" src="https://img.icons8.com/fluency/48/000000/instagram-new.png" /></a>
         </ListGroup.Item>
       </ListGroup>
       <Card.Body>

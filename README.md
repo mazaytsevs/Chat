@@ -13,6 +13,8 @@ ___
 
 <br/>
 <br/>
+<br/>
+
 
  А также: REST API, web-sockets, Sequelize
  Шаблоны дизайнов взяты с сайта: https://react-bootstrap.github.io/

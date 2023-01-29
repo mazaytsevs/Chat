@@ -24,13 +24,13 @@ ___
 ## Инструкция по локальному запуску:
 - В папке "server" находим файл .envExample, переименовываем файл на .env и вставляем в DB_USER
 DB_PASS креды для вашей базы данных PostgresQL.
-- Открываем три терминала: client (cd client), server (cd server), socket (cd server).
-- Далее необходимо установить пакеты для фронта и бэка командой npm i в каждом из терминалов.
-- В терминале server: npx sequelize-cli db:migrate , а затем: npx sequelize-cli db:seed
+- Открываем три терминала: client (```cd client```), server (```cd server```), socket (```cd server```).
+- Далее необходимо установить пакеты для фронта и бэка командой ```npm i``` в каждом из терминалов.
+- В терминале server: ```npx sequelize-cli db:migrate``` , а затем: ```npx sequelize-cli db:seed:all```
 - Запуск каждого из сервисов выполняется следующими командами:
-server: npm run dev
-sockets: npm run dev-sockets
-client: npm start
+```server: npm run dev```
+```sockets: npm run dev-sockets```
+```client: npm start```
 
 ___
 
